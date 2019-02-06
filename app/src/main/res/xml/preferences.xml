@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/sensors_settings">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="enable_gravity"
+            android:title="@string/enable_gravity" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="enable_light"
+            android:title="@string/enable_light" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
