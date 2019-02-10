@@ -7,12 +7,15 @@ import android.widget.Toast;
 
 public class eyedService extends Service {
     private SensorListener sensorListener;
+    private ScreenListener screenListener;
 
     @Override
     public void onCreate() {
         Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
         sensorListener = new SensorListener(this);
         sensorListener.register();
+        screenListener = new ScreenListener(this, sensorListener);
+        screenListener.register();
     }
 
     @Override
@@ -28,5 +31,6 @@ public class eyedService extends Service {
     @Override
     public void onDestroy() {
         sensorListener.unregister();
+        screenListener.unregister();
     }
 }
