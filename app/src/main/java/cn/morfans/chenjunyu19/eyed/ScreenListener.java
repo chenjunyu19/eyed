@@ -22,7 +22,7 @@ class ScreenListener {
                     case Intent.ACTION_SCREEN_OFF:
                         sensorListener.unregister();
                         break;
-                    case Intent.ACTION_USER_PRESENT:
+                    case Intent.ACTION_SCREEN_ON:
                         sensorListener.register();
                         break;
                 }
@@ -34,7 +34,7 @@ class ScreenListener {
         broadcastReceiver = new BroadcastReceiver();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
-        intentFilter.addAction(Intent.ACTION_USER_PRESENT);
+        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
         context.registerReceiver(broadcastReceiver, intentFilter);
     }
 
