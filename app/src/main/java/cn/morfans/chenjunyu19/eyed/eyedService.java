@@ -3,7 +3,6 @@ package cn.morfans.chenjunyu19.eyed;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.widget.Toast;
 
 public class eyedService extends Service {
     private SensorListener sensorListener;
@@ -11,7 +10,6 @@ public class eyedService extends Service {
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
         sensorListener = new SensorListener(this);
         sensorListener.register();
         screenListener = new ScreenListener(this, sensorListener);

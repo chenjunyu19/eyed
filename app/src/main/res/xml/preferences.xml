@@ -12,4 +12,12 @@
             android:title="@string/light" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/permissions">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="device_admin"
+            android:title="@string/device_admin"
+            android:summary="@string/device_admin_summary"/>
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -4,4 +4,7 @@
     <string name="sensors">传感器</string>
     <string name="gravity">重力</string>
     <string name="light">光照</string>
+    <string name="permissions">权限</string>
+    <string name="device_admin">设备管理器</string>
+    <string name="device_admin_summary">在你以不健康的方式用眼时锁屏。</string>
 </resources>

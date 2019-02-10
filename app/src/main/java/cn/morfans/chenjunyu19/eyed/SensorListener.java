@@ -1,5 +1,7 @@
 package cn.morfans.chenjunyu19.eyed;
 
+import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -13,28 +15,38 @@ class SensorListener {
     private Context context;
     private SensorManager sensorManager;
     private SensorEventListener sensorEventListener;
+    private DevicePolicyManager devicePolicyManager;
 
     SensorListener(Context context) {
         this.context = context;
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
     }
 
     private class SensorEventListener implements android.hardware.SensorEventListener {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            switch (event.sensor.getType()) {
-                case Sensor.TYPE_GRAVITY:
-                    if (event.values[2] <= -3 && System.currentTimeMillis() - lastToast >= 2500) {
-                        Toast.makeText(context, "你正在以不健康的姿势使用手机！", Toast.LENGTH_SHORT).show();
-                        lastToast = System.currentTimeMillis();
+            if (System.currentTimeMillis() - lastToast >= 2500) {
+                String toastText = "";
+                switch (event.sensor.getType()) {
+                    case Sensor.TYPE_GRAVITY:
+                        if (event.values[2] <= -3) {
+                            toastText = "你正在以不健康的姿势使用手机！";
+                        }
+                        break;
+                    case Sensor.TYPE_LIGHT:
+                        if (event.values[0] == 0) {
+                            toastText = "你正在黑暗的环境中使用手机！";
+                        }
+                        break;
+                }
+                if (!toastText.equals("")) {
+                    Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
+                    lastToast = System.currentTimeMillis();
+                    if (devicePolicyManager.isAdminActive(new ComponentName(context, MainActivity.DeviceAdminReceiver.class))) {
+                        devicePolicyManager.lockNow();
                     }
-                    break;
-                case Sensor.TYPE_LIGHT:
-                    if (event.values[0] == 0 && System.currentTimeMillis() - lastToast >= 2500) {
-                        Toast.makeText(context, "你正在黑暗的环境中使用手机！", Toast.LENGTH_SHORT).show();
-                        lastToast = System.currentTimeMillis();
-                    }
-                    break;
+                }
             }
         }
 
