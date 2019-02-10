@@ -17,10 +17,15 @@ class ScreenListener {
     private class BroadcastReceiver extends android.content.BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                sensorListener.unregister();
-            } else if (Intent.ACTION_USER_PRESENT.equals(intent.getAction())) {
-                sensorListener.register();
+            if (intent.getAction() != null) {
+                switch (intent.getAction()) {
+                    case Intent.ACTION_SCREEN_OFF:
+                        sensorListener.unregister();
+                        break;
+                    case Intent.ACTION_USER_PRESENT:
+                        sensorListener.register();
+                        break;
+                }
             }
         }
     }
