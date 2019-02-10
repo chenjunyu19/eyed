@@ -47,10 +47,10 @@ class SensorListener {
     void register() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         sensorEventListener = new SensorEventListener();
-        if (sharedPref.getBoolean("enable_gravity", false)) {
+        if (sharedPref.getBoolean("gravity", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_NORMAL);
         }
-        if (sharedPref.getBoolean("enable_light", false)) {
+        if (sharedPref.getBoolean("light", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
         }
     }

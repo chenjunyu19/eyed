@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eyed</string>
-    <string name="sensors_settings">Sensors settings</string>
-    <string name="enable_gravity">Enable gravity monitor</string>
-    <string name="enable_light">Enable light monitor</string>
+    <string name="sensors">Sensors</string>
+    <string name="gravity">Gravity</string>
+    <string name="light">Light</string>
 </resources>

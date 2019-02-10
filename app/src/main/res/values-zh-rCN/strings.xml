@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">明月护眼</string>
-    <string name="sensors_settings">传感器设置</string>
-    <string name="enable_gravity">启用重力监视</string>
-    <string name="enable_light">启用光照监视</string>
+    <string name="sensors">传感器</string>
+    <string name="gravity">重力</string>
+    <string name="light">光照</string>
 </resources>
