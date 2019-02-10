@@ -31,12 +31,12 @@ class SensorListener {
                 switch (event.sensor.getType()) {
                     case Sensor.TYPE_GRAVITY:
                         if (event.values[2] <= -3) {
-                            toastText = "你正在以不健康的姿势使用手机！";
+                            toastText = context.getString(R.string.toast_gravity);
                         }
                         break;
                     case Sensor.TYPE_LIGHT:
                         if (event.values[0] == 0) {
-                            toastText = "你正在黑暗的环境中使用手机！";
+                            toastText = context.getString(R.string.toast_light);
                         }
                         break;
                 }

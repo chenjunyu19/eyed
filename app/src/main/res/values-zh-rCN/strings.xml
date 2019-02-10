@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">明月护眼</string>
+    <string name="toast_gravity">你正在以不健康的姿势用眼！</string>
+    <string name="toast_light">你正在黑暗的环境中用眼！</string>
     <string name="sensors">传感器</string>
     <string name="gravity">重力</string>
     <string name="light">光照</string>

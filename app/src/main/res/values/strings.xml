@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eyed</string>
+    <string name="toast_gravity">You are using your eyes in an unhealthy way!</string>
+    <string name="toast_light">You are using your eyes in a dark environmnet!</string>
     <string name="sensors">Sensors</string>
     <string name="gravity">Gravity</string>
     <string name="light">Light</string>
     <string name="permissions">Permissions</string>
     <string name="device_admin">Device administrator</string>
-    <string name="device_admin_summary">To lock the screen when you use your eye in an unhealthy way.</string>
+    <string name="device_admin_summary">To lock the screen when you use your eyes in an unhealthy way.</string>
 </resources>
