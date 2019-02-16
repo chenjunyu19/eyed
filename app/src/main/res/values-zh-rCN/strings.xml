@@ -9,6 +9,8 @@
     <string name="gravity">重力</string>
     <string name="light">光照</string>
     <string name="permissions">权限</string>
+    <string name="ignore_battery_optimizations">忽略电池优化</string>
+    <string name="ignore_battery_optimizations_summary">保持在后台工作。注意：如果有其他后台限制，请一并解除。</string>
     <string name="device_admin">设备管理器</string>
     <string name="device_admin_summary">在你以不健康的方式用眼时锁屏。</string>
 </resources>

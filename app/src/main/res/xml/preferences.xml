@@ -15,6 +15,11 @@
     <PreferenceCategory android:title="@string/permissions">
         <SwitchPreference
             android:defaultValue="false"
+            android:key="ignore_battery_optimizations"
+            android:title="@string/ignore_battery_optimizations"
+            android:summary="@string/ignore_battery_optimizations_summary"/>
+        <SwitchPreference
+            android:defaultValue="false"
             android:key="device_admin"
             android:title="@string/device_admin"
             android:summary="@string/device_admin_summary"/>

@@ -8,20 +8,33 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.PowerManager;
+import android.provider.Settings;
 
 public class MainActivity extends Activity {
     static Intent intent;
     static DevicePolicyManager devicePolicyManager;
     static ComponentName deviceAdminReceiver;
-    static SharedPreferences sharedPref;
 
     public static class DeviceAdminReceiver extends android.app.admin.DeviceAdminReceiver {
     }
 
     public static class PreferenceFragment extends android.preference.PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+        boolean isIgnoringBatteryOptimizations() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PowerManager powerManager = (PowerManager) getActivity().getSystemService(POWER_SERVICE);
+                if (powerManager != null) {
+                    return powerManager.isIgnoringBatteryOptimizations(getActivity().getPackageName());
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -36,23 +49,37 @@ public class MainActivity extends Activity {
                     getActivity().stopService(intent);
                     getActivity().startService(intent);
                     break;
+                case "ignore_battery_optimizations":
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (sharedPreferences.getBoolean(key, false)) {
+                            startActivity(new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:" + getActivity().getPackageName())));
+                        } else {
+                            startActivity(new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS));
+                        }
+                    }
+                    break;
                 case "device_admin":
-                    if (sharedPreferences.getBoolean("device_admin", false)) {
+                    if (sharedPreferences.getBoolean(key, false)) {
                         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
                         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, deviceAdminReceiver);
                         startActivity(intent);
                     } else {
                         devicePolicyManager.removeActiveAdmin(deviceAdminReceiver);
                     }
+                    break;
             }
         }
 
         @Override
         public void onResume() {
             super.onResume();
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
-            sharedPref.edit().putBoolean("device_admin", devicePolicyManager.isAdminActive(deviceAdminReceiver)).apply();
+            getPreferenceManager().getSharedPreferences().edit()
+                    .putBoolean("ignore_battery_optimizations", isIgnoringBatteryOptimizations())
+                    .putBoolean("device_admin", devicePolicyManager.isAdminActive(deviceAdminReceiver))
+                    .apply();
             onCreate(new Bundle());
+            getPreferenceScreen().findPreference("ignore_battery_optimizations").setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
+            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
@@ -67,7 +94,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
         deviceAdminReceiver = new ComponentName(this, DeviceAdminReceiver.class);
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PreferenceFragment()).commit();
         intent = new Intent(this, eyedService.class);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
