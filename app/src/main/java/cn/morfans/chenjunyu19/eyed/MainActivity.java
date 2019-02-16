@@ -1,11 +1,14 @@
 package cn.morfans.chenjunyu19.eyed;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
@@ -67,6 +70,14 @@ public class MainActivity extends Activity {
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new PreferenceFragment()).commit();
         intent = new Intent(this, eyedService.class);
-        startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (notificationManager != null) {
+                notificationManager.createNotificationChannel(new NotificationChannel("eyed", getString(R.string.app_name), NotificationManager.IMPORTANCE_MIN));
+            }
+            startForegroundService(intent);
+        } else {
+            startService(intent);
+        }
     }
 }
