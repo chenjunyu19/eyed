@@ -8,6 +8,9 @@
     <string name="sensors">传感器</string>
     <string name="gravity">重力</string>
     <string name="light">光照</string>
+    <string name="parameters">参数</string>
+    <string name="delay">每次操作之间的延迟（毫秒）</string>
+    <string name="illuminance_min">允许使用设备的最低照度（勒克斯）</string>
     <string name="permissions">权限</string>
     <string name="ignore_battery_optimizations">忽略电池优化</string>
     <string name="ignore_battery_optimizations_summary">保持在后台工作。注意：如果有其他后台限制，请一并解除。</string>

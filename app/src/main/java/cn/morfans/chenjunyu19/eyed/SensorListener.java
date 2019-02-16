@@ -24,9 +24,17 @@ class SensorListener {
     }
 
     private class SensorEventListener implements android.hardware.SensorEventListener {
+        final int delay;
+        final int illuminanceMin;
+
+        SensorEventListener(int delay, int illuminanceMin) {
+            this.delay = delay;
+            this.illuminanceMin = illuminanceMin;
+        }
+
         @Override
         public void onSensorChanged(SensorEvent event) {
-            if (System.currentTimeMillis() - lastToast >= 2500) {
+            if (System.currentTimeMillis() - lastToast >= delay) {
                 String toastText = "";
                 switch (event.sensor.getType()) {
                     case Sensor.TYPE_GRAVITY:
@@ -52,17 +60,16 @@ class SensorListener {
 
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
         }
     }
 
     void register() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
-        sensorEventListener = new SensorEventListener();
-        if (sharedPref.getBoolean("gravity", false)) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        sensorEventListener = new SensorEventListener(Integer.parseInt(sharedPreferences.getString("delay", "5000")), Integer.parseInt(sharedPreferences.getString("illuminance_min", "1")));
+        if (sharedPreferences.getBoolean("gravity", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_NORMAL);
         }
-        if (sharedPref.getBoolean("light", false)) {
+        if (sharedPreferences.getBoolean("light", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT), SensorManager.SENSOR_DELAY_NORMAL);
         }
     }

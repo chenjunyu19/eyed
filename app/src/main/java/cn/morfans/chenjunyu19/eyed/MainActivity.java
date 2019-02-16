@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
 public class MainActivity extends Activity {
@@ -23,6 +24,18 @@ public class MainActivity extends Activity {
     }
 
     public static class PreferenceFragment extends android.preference.PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
+        PreferenceScreen preferenceScreen;
+        SharedPreferences sharedPreferences;
+
+        void setSummary(String key, String defValue) {
+            preferenceScreen.findPreference(key).setSummary(sharedPreferences.getString(key, defValue));
+        }
+
+        void refreshSummaries() {
+            setSummary("delay", "5000");
+            setSummary("illuminance_min", "1");
+        }
+
         boolean isIgnoringBatteryOptimizations() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 PowerManager powerManager = (PowerManager) getActivity().getSystemService(POWER_SERVICE);
@@ -39,11 +52,15 @@ public class MainActivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+            preferenceScreen = getPreferenceScreen();
+            sharedPreferences = getPreferenceManager().getSharedPreferences();
         }
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             switch (key) {
+                case "delay":
+                    refreshSummaries();
                 case "gravity":
                 case "light":
                     getActivity().stopService(intent);
@@ -73,19 +90,20 @@ public class MainActivity extends Activity {
         @Override
         public void onResume() {
             super.onResume();
-            getPreferenceManager().getSharedPreferences().edit()
+            sharedPreferences.edit()
                     .putBoolean("ignore_battery_optimizations", isIgnoringBatteryOptimizations())
                     .putBoolean("device_admin", devicePolicyManager.isAdminActive(deviceAdminReceiver))
                     .apply();
             onCreate(new Bundle());
-            getPreferenceScreen().findPreference("ignore_battery_optimizations").setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
-            getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+            refreshSummaries();
+            preferenceScreen.findPreference("ignore_battery_optimizations").setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
+            sharedPreferences.registerOnSharedPreferenceChangeListener(this);
         }
 
         @Override
         public void onPause() {
             super.onPause();
-            getPreferenceManager().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+            sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
         }
     }
 

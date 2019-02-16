@@ -12,17 +12,30 @@
             android:title="@string/light" />
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/parameters">
+        <EditTextPreference
+            android:defaultValue="5000"
+            android:inputType="number"
+            android:key="delay"
+            android:title="@string/delay" />
+        <EditTextPreference
+            android:defaultValue="1"
+            android:inputType="number"
+            android:key="illuminance_min"
+            android:title="@string/illuminance_min" />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/permissions">
         <SwitchPreference
             android:defaultValue="false"
             android:key="ignore_battery_optimizations"
-            android:title="@string/ignore_battery_optimizations"
-            android:summary="@string/ignore_battery_optimizations_summary"/>
+            android:summary="@string/ignore_battery_optimizations_summary"
+            android:title="@string/ignore_battery_optimizations" />
         <SwitchPreference
             android:defaultValue="false"
             android:key="device_admin"
-            android:title="@string/device_admin"
-            android:summary="@string/device_admin_summary"/>
+            android:summary="@string/device_admin_summary"
+            android:title="@string/device_admin" />
     </PreferenceCategory>
 
 </PreferenceScreen>
