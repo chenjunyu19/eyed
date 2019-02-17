@@ -18,7 +18,7 @@ public class eyedService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId("eyed");
         }
-        builder.setSmallIcon(android.R.drawable.btn_star)
+        builder.setSmallIcon(R.drawable.ic_visibility)
                 .setContentTitle(getString(R.string.notification_title))
                 .setContentText(getString(R.string.notification_text))
                 .setPriority(Notification.PRIORITY_MIN)
