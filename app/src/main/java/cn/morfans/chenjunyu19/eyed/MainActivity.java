@@ -33,6 +33,8 @@ public class MainActivity extends Activity {
 
         void refreshSummaries() {
             setSummary("delay", "5000");
+            setSummary("abs_gx_max", "9");
+            setSummary("gz_min", "-3");
             setSummary("illuminance_min", "1");
         }
 
@@ -60,6 +62,9 @@ public class MainActivity extends Activity {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             switch (key) {
                 case "delay":
+                case "abs_gx_max":
+                case "gz_min":
+                case "illuminance_min":
                     refreshSummaries();
                 case "gravity":
                 case "light":

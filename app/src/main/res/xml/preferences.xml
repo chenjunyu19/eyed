@@ -12,19 +12,6 @@
             android:title="@string/light" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/parameters">
-        <EditTextPreference
-            android:defaultValue="5000"
-            android:inputType="number"
-            android:key="delay"
-            android:title="@string/delay" />
-        <EditTextPreference
-            android:defaultValue="1"
-            android:inputType="number"
-            android:key="illuminance_min"
-            android:title="@string/illuminance_min" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/permissions">
         <SwitchPreference
             android:defaultValue="false"
@@ -36,6 +23,29 @@
             android:key="device_admin"
             android:summary="@string/device_admin_summary"
             android:title="@string/device_admin" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/parameters">
+        <EditTextPreference
+            android:defaultValue="5000"
+            android:inputType="number"
+            android:key="delay"
+            android:title="@string/delay" />
+        <EditTextPreference
+            android:defaultValue="9"
+            android:inputType="numberDecimal"
+            android:key="abs_gx_max"
+            android:title="@string/abs_gx_max" />
+        <EditTextPreference
+            android:defaultValue="-3"
+            android:inputType="numberSigned|numberDecimal"
+            android:key="gz_min"
+            android:title="@string/gz_min" />
+        <EditTextPreference
+            android:defaultValue="1"
+            android:inputType="number"
+            android:key="illuminance_min"
+            android:title="@string/illuminance_min" />
     </PreferenceCategory>
 
 </PreferenceScreen>

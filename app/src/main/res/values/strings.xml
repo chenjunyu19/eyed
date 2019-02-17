@@ -8,12 +8,14 @@
     <string name="sensors">Sensors</string>
     <string name="gravity">Gravity</string>
     <string name="light">Light</string>
-    <string name="parameters">Parameters</string>
-    <string name="delay">Delay between each operation (ms)</string>
-    <string name="illuminance_min">Minimum illumination which allows to use your device (lx)</string>
     <string name="ignore_battery_optimizations">Ignore battery optimizations</string>
     <string name="ignore_battery_optimizations_summary">To keep working in the background. NOTICE: If there are other background restrictions, please remove them together.</string>
     <string name="permissions">Permissions</string>
     <string name="device_admin">Device administrator</string>
     <string name="device_admin_summary">To lock the screen when you use your eyes in an unhealthy way.</string>
+    <string name="parameters">Parameters</string>
+    <string name="delay">Delay between each operation (ms)</string>
+    <string name="abs_gx_max">Allowable maximum abs(g[x]) (m/s^2)</string>
+    <string name="gz_min">Allowable minimum g[z] (m/s^2)</string>
+    <string name="illuminance_min">Allowable minimum illumination (lx)</string>
 </resources>

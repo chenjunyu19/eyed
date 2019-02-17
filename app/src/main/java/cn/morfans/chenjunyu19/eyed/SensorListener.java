@@ -24,11 +24,15 @@ class SensorListener {
     }
 
     private class SensorEventListener implements android.hardware.SensorEventListener {
-        final int delay;
+        final short delay;
+        final float absGxMax;
+        final float gzMin;
         final int illuminanceMin;
 
-        SensorEventListener(int delay, int illuminanceMin) {
+        SensorEventListener(short delay, float absGxMax, float gzMin, int illuminanceMin) {
             this.delay = delay;
+            this.absGxMax = absGxMax;
+            this.gzMin = gzMin;
             this.illuminanceMin = illuminanceMin;
         }
 
@@ -38,7 +42,7 @@ class SensorListener {
                 String toastText = "";
                 switch (event.sensor.getType()) {
                     case Sensor.TYPE_GRAVITY:
-                        if (event.values[2] <= -3) {
+                        if (Math.abs(event.values[0]) > absGxMax || event.values[2] < gzMin) {
                             toastText = context.getString(R.string.toast_gravity);
                         }
                         break;
@@ -65,7 +69,10 @@ class SensorListener {
 
     void register() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        sensorEventListener = new SensorEventListener(Integer.parseInt(sharedPreferences.getString("delay", "5000")), Integer.parseInt(sharedPreferences.getString("illuminance_min", "1")));
+        sensorEventListener = new SensorEventListener(Short.valueOf(sharedPreferences.getString("delay", "5000")),
+                Float.valueOf(sharedPreferences.getString("abs_gx_max", "9")),
+                Float.valueOf(sharedPreferences.getString("gz_min", "-3")),
+                Integer.parseInt(sharedPreferences.getString("illuminance_min", "1")));
         if (sharedPreferences.getBoolean("gravity", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_NORMAL);
         }
