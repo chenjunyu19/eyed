@@ -5,6 +5,10 @@
     <string name="toast_light">你正在黑暗的环境中用眼！</string>
     <string name="notification_title">明月护眼正在运行</string>
     <string name="notification_text">点击以停止。</string>
+    <string name="about">关于</string>
+    <string name="version">测试版</string>
+    <string name="readme">自述文件</string>
+    <string name="readme_summary">推荐在首次使用或需要帮助时阅读。</string>
     <string name="sensors">传感器</string>
     <string name="gravity">重力</string>
     <string name="light">光照</string>

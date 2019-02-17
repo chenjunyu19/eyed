@@ -8,6 +8,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -100,6 +102,13 @@ public class MainActivity extends Activity {
                     .putBoolean("device_admin", devicePolicyManager.isAdminActive(deviceAdminReceiver))
                     .apply();
             onCreate(new Bundle());
+            try {
+                PackageManager packageManager = getActivity().getPackageManager();
+                PackageInfo packageInfo = packageManager.getPackageInfo(getActivity().getPackageName(), 0);
+                preferenceScreen.findPreference("version").setSummary(packageInfo.versionName + " (" + packageInfo.versionCode + ")");
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
             refreshSummaries();
             preferenceScreen.findPreference("ignore_battery_optimizations").setEnabled(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M);
             sharedPreferences.registerOnSharedPreferenceChangeListener(this);
