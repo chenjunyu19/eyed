@@ -11,13 +11,15 @@
     <string name="readme_summary">Recommended to read when first used or need help.</string>
     <string name="sensors">Sensors</string>
     <string name="gravity">Gravity</string>
+    <string name="gravity_summary">Detect your posture when using your eyes.</string>
     <string name="light">Light</string>
+    <string name="light_summary">Detect the environment when you use your eyes.</string>
+    <string name="permissions">Permissions</string>
     <string name="ignore_battery_optimizations">Ignore battery optimizations</string>
     <string name="ignore_battery_optimizations_summary">To keep working in the background. NOTICE: If there are other background restrictions, please remove them together.</string>
-    <string name="permissions">Permissions</string>
     <string name="device_admin">Device administrator</string>
     <string name="device_admin_summary">To lock the screen when you use your eyes in an unhealthy way.</string>
-    <string name="parameters">Parameters</string>
+    <string name="parameters">Parameters (For advanced users)</string>
     <string name="delay">Delay between each operation (ms)</string>
     <string name="abs_gx_max">Allowable maximum abs(g[x]) (m/s^2)</string>
     <string name="gz_min">Allowable minimum g[z] (m/s^2)</string>

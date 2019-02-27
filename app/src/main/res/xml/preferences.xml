@@ -22,10 +22,12 @@
         <SwitchPreference
             android:defaultValue="true"
             android:key="gravity"
+            android:summary="@string/gravity_summary"
             android:title="@string/gravity" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="light"
+            android:summary="@string/light_summary"
             android:title="@string/light" />
     </PreferenceCategory>
 

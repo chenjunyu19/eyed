@@ -11,13 +11,15 @@
     <string name="readme_summary">推荐在首次使用或需要帮助时阅读。</string>
     <string name="sensors">传感器</string>
     <string name="gravity">重力</string>
+    <string name="gravity_summary">检测你用眼时的姿势</string>
     <string name="light">光照</string>
+    <string name="light_summary">检测你用眼时的环境</string>
     <string name="permissions">权限</string>
     <string name="ignore_battery_optimizations">忽略电池优化</string>
     <string name="ignore_battery_optimizations_summary">保持在后台工作。注意：如果有其他后台限制，请一并解除。</string>
     <string name="device_admin">设备管理器</string>
     <string name="device_admin_summary">在你以不健康的方式用眼时锁屏。</string>
-    <string name="parameters">参数</string>
+    <string name="parameters">参数（适用于高级用户）</string>
     <string name="delay">每次操作之间的延迟（毫秒）</string>
     <string name="abs_gx_max">允许的 abs(g[x]) 的最大值（m/s^2）</string>
     <string name="gz_min">允许的 g[z] 的最小值（m/s^2）</string>
