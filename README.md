@@ -4,8 +4,6 @@
 
 ## 快速上手
 
-下载：[GitHub releases](https://github.com/chenjunyu19/eyed/releases)
-
 安装后直接打开本应用，护眼服务会自动在后台启动，此时可以通过应用界面修改应用选项，在通知栏中点击服务通知可以停止护眼服务。
 
 ## 常见问题
