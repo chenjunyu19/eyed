@@ -4,18 +4,7 @@
     <PreferenceCategory android:title="@string/about">
         <Preference
             android:key="version"
-            android:title="@string/version">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/chenjunyu19/eyed" />
-        </Preference>
-        <Preference
-            android:summary="@string/readme_summary"
-            android:title="@string/readme">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/chenjunyu19/eyed/blob/master/README.md" />
-        </Preference>
+            android:title="@string/version" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/sensors">

@@ -7,8 +7,6 @@
     <string name="notification_text">Tap to stop.</string>
     <string name="about">About</string>
     <string name="version">Beta</string>
-    <string name="readme">Readme file</string>
-    <string name="readme_summary">Recommended to read when first used or need help.</string>
     <string name="sensors">Sensors</string>
     <string name="gravity">Gravity</string>
     <string name="gravity_summary">Detect your posture when using your eyes.</string>
