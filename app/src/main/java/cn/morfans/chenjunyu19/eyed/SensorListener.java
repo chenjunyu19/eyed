@@ -10,6 +10,8 @@ import android.hardware.SensorManager;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import java.util.Objects;
+
 class SensorListener {
     private long lastToast;
     private Context context;
@@ -47,7 +49,7 @@ class SensorListener {
                         }
                         break;
                     case Sensor.TYPE_LIGHT:
-                        if (event.values[0] == 0) {
+                        if (event.values[0] < illuminanceMin) {
                             toastText = context.getString(R.string.toast_light);
                         }
                         break;
@@ -70,9 +72,9 @@ class SensorListener {
     void register() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sensorEventListener = new SensorEventListener(Short.valueOf(sharedPreferences.getString("delay", "5000")),
-                Float.valueOf(sharedPreferences.getString("abs_gx_max", "9")),
-                Float.valueOf(sharedPreferences.getString("gz_min", "-3")),
-                Integer.parseInt(sharedPreferences.getString("illuminance_min", "1")));
+                Float.valueOf(Objects.requireNonNull(sharedPreferences.getString("abs_gx_max", "9"))),
+                Float.valueOf(Objects.requireNonNull(sharedPreferences.getString("gz_min", "-3"))),
+                Integer.parseInt(Objects.requireNonNull(sharedPreferences.getString("illuminance_min", "1"))));
         if (sharedPreferences.getBoolean("gravity", false)) {
             sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY), SensorManager.SENSOR_DELAY_NORMAL);
         }
